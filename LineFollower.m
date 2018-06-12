@@ -1,10 +1,28 @@
-function [linearVelocityLeft,linearVelocityRight] = LineFollower(leftstate,middlestate,rightstate)
+function [linearVelocityLeft,linearVelocityRight] = LineFollower(leftstate,middlestate,rightstate,y)
     linearVelocityLeft=1;
     linearVelocityRight=1;
-      if (leftstate==0&&rightstate==0&&middlestate==0) 
-       linearVelocityLeft=0.5;
-    linearVelocityRight=-0.5;
-                   
+      if (leftstate==0&&rightstate==0&&middlestate==0)
+          order = stack('pop')
+       switch(order)
+           case 0 %stop
+               linearVelocityLeft=0
+               linearVelocityRight=0
+           case 1 %forward
+               linearVelocityLeft=linearVelocityLeft
+               linearVelocityRight=linearVelocityRight
+           case 2 %right 90 degree
+               linearVelocityLeft=0.5
+               linearVelocityRight=0
+           case 3 %left 90 degree
+               linearVelocityLeft=0
+               linearVelocityRight=0.5
+           case 4 %right 180 degree
+               linearVelocityLeft=0.5
+               linearVelocityRight=-0.5
+           case 5 %left 180 degree
+               linearVelocityLeft=-0.5
+               linearVelocityRight=0.5               
+       end
       end 
       
 
